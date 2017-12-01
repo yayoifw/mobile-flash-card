@@ -1,3 +1,9 @@
+/**
+ * Quiz: a quiz is a card containing the question and answer.
+ * - question
+ * - answer
+ * - isAnswerShown
+ */
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
 
