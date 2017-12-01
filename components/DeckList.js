@@ -2,17 +2,21 @@
 // deskList = []
 import React, {Component} from 'react'
 import {View, Text, FlatList, TouchableOpacity} from 'react-native'
+import { StackNavigator } from 'react-navigation'
 
 const decks = [
   {
+    key: 1,
     name: 'udacicard',
     cards: [1,2,3]
   },
   {
+    key: 2,
     name: 'redux',
     cards: [4,5,6,7,8,9]
   },
   {
+    key: 3,
     name: 'react',
     cards: []
   }
