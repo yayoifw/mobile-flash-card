@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Quiz from './components/Quiz'
 import DeckList from './components/DeckList'
+import HomeScreen from './components/HomeScreen'
 
 export default class App extends React.Component {
   render() {
     return (
-        <DeckList />
+        <HomeScreen />
     );
   }
 }

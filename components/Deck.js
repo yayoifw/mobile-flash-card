@@ -11,8 +11,13 @@ import React, { Component } from 'react'
 import {View,Text} from 'react-native'
 
 class Deck extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: "Deck"
+  })
+
   render() {
-    const { name, cards } = this.props
+    const { params } = this.props.navigation.state
+    const { name, cards } = params.item
 
     return (
       <View>

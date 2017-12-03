@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import {View, Text, FlatList, TouchableOpacity} from 'react-native'
 import { StackNavigator } from 'react-navigation'
+import Deck from './Deck'
 
 const decks = [
   {
@@ -22,23 +23,53 @@ const decks = [
   }
 ]
 
+
 class DeckList extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "DeckList",
+      headerRight: (
+        <TouchableOpacity><Text>Add</Text></TouchableOpacity>),
+    }
+  }
+
+  constructor() {
+    super()
+    this.onPressItem = this.onPressItem.bind(this)
+    this.renderItem = this.renderItem.bind(this)
+  }
+
+  onPressItem(item) {
+    console.log(item)
+    this.props.navigation.navigate("Deck", { item })
+  }
+
   renderItem({item}) {
     const { name, cards } = item
     console.log(item)
     const noOfCards = cards.length
     return (
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {this.onPressItem(item)}}>
           <Text>{name}</Text>
           <Text>{noOfCards} cards</Text>
         </TouchableOpacity>
       </View>
     )
   }
+
   render() {
-    return (<FlatList data={decks} renderItem={this.renderItem}/>)
+    return (<FlatList data={decks} renderItem={this.renderItem} />)
   }
 }
+
+const StackNav = StackNavigator({
+  DeckList: {
+    screen: DeckList,
+  },
+  DeckDetails: {
+    screen: Deck
+  },
+})
 
 export default DeckList
