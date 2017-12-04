@@ -33,14 +33,20 @@ class DeckList extends Component {
     }
   }
 
+  constructor() {
+    super()
+    this.onPressItem = this.onPressItem.bind(this)
+    this.renderItem = this.renderItem.bind(this)
+  }
+
   onPressItem(item) {
     console.log(item)
     this.props.navigation.navigate("Deck", { item })
   }
 
-  // Define a func as class property. 'this' obj is bind in enclosing scope.
-  renderItem = ({item}) => {
+  renderItem({item}) {
     const { name, cards } = item
+    console.log(item)
     const noOfCards = cards.length
     return (
       <View>
