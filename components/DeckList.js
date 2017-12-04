@@ -1,7 +1,7 @@
 // List of Decks
 // deskList = []
 import React, {Component} from 'react'
-import {View, Text, FlatList, TouchableOpacity} from 'react-native'
+import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import Deck from './Deck'
 
@@ -29,7 +29,7 @@ class DeckList extends Component {
     return {
       title: "DeckList",
       headerRight: (
-        <TouchableOpacity><Text>Add</Text></TouchableOpacity>),
+        <TouchableOpacity style={styles.addButton}><Text>Add</Text></TouchableOpacity>),
     }
   }
 
@@ -38,22 +38,31 @@ class DeckList extends Component {
     this.props.navigation.navigate("Deck", { item })
   }
 
+  renderSeparator() {
+    return (<View style={{ height: 1, backgroundColor: 'black'}}/>)
+  }
+
   // Define a func as class property. 'this' obj is bind in enclosing scope.
   renderItem = ({item}) => {
     const { name, cards } = item
     const noOfCards = cards.length
     return (
-      <View>
+      <View style={styles.listCell}>
         <TouchableOpacity onPress={() => {this.onPressItem(item)}}>
-          <Text>{name}</Text>
-          <Text>{noOfCards} cards</Text>
+          <Text style={styles.listTitle}>{name}</Text>
+          <Text style={styles.listSubTitle}>{noOfCards} cards</Text>
         </TouchableOpacity>
       </View>
     )
   }
 
   render() {
-    return (<FlatList data={decks} renderItem={this.renderItem} />)
+    return (
+      <FlatList
+        style={styles.container}
+        data={decks}
+        renderItem={this.renderItem}
+      />)
   }
 }
 
@@ -67,3 +76,34 @@ const StackNav = StackNavigator({
 })
 
 export default DeckList
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'orange'
+  },
+  listCell: {
+    padding: 12,
+    borderBottomWidth: 1,
+    borderColor: 'black',
+    alignItems:'center'
+  },
+  listTitle: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    fontSize: 32,
+    textAlign: 'center'
+  },
+  listSubTitle: {
+    fontSize: 14,
+    textAlign: 'center'
+  },
+  addButton: {
+    marginRight: 8,
+    padding: 6,
+    paddingRight: 12,
+    paddingLeft: 12,
+    backgroundColor: 'orange',
+  }
+
+})
