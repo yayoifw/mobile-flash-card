@@ -4,7 +4,6 @@ import React, {Component} from 'react'
 import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet} from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import Deck from './Deck'
-import DeckAdd from './DeckAdd'
 import {Feather, Ionicons} from '@expo/vector-icons'
 
 const decks = [
@@ -33,7 +32,7 @@ class DeckList extends Component {
       title: "DeckList",
       headerRight: (
         <TouchableOpacity
-          onPress={() => {navigation.navigate('DeckAdd', { mode: 'add' })}}
+          onPress={() => navigation.setParams({ mode: 'add' })}
           style={styles.addButton}><Feather name="plus" size={32}/></TouchableOpacity>),
     }
   }
@@ -51,9 +50,43 @@ class DeckList extends Component {
 
   }
 
+  toggleModal(isVisible) {
+    this.setState({
+      modalVisible: isVisible
+    })
+  }
+
   onPressItem(item) {
     console.log(item)
     this.props.navigation.navigate("Deck", { item })
+  }
+
+  renderModal(params) {
+    if (params === undefined) return null
+
+    if (params.mode === 'add') {
+      return (
+        <Modal visible={this.state.modalVisible} transparent={true}
+               onRequestClose={() => {
+                 console.log("Modal has been closed.")
+               }}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text>Add Deck</Text>
+              <Ionicons name="ios-close" size={32}/>
+              <Text style={styles.text}>Modal is open!</Text>
+
+              <TouchableHighlight onPress={() => {
+                this.toggleModal(!this.state.modalVisible)
+              }}>
+
+                <Text style={styles.text}>Close Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+      )
+    }
   }
 
   renderSeparator() {
@@ -84,6 +117,7 @@ class DeckList extends Component {
           data={decks}
           renderItem={this.renderItem}
         />
+        {this.renderModal(params)}
       </View>)
   }
 }
@@ -126,5 +160,27 @@ const styles = StyleSheet.create({
     padding: 6,
     paddingRight: 12,
     paddingLeft: 12,
-  }
+  },
+  modal: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'blue'
+  },
+  modalContainer: {
+    flex:1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+
 })
