@@ -8,17 +8,17 @@ class DeckAdd extends Component {
   })
 
   state = {
-    value: 'abc'
+    value: ''
   }
 
   render() {
     return (
       <View stye={styles.container}>
-        <Text>Name</Text>
+        <Text style={styles.formLabel}>What is the title of your new deck?</Text>
         <TextInput style={styles.formInput}
                    onChangeText={(text) => this.setState({ value: text})}
-                   value='abc'/>
-        <TouchableOpacity><Text>Add Deck</Text></TouchableOpacity>
+                   value={this.state.value} placeholder="Deck Title"/>
+        <TouchableOpacity style={styles.submitButton}><Text style={styles.buttonTitle}>Submit</Text></TouchableOpacity>
       </View>
     );
   }
@@ -27,11 +27,37 @@ class DeckAdd extends Component {
 const styles = StyleSheet.create({
   container: {
     flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  formLabel: {
+    fontSize: 36,
+    margin: 12,
+    textAlign: 'center'
   },
   formInput: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 8,
+    margin: 12,
+    padding: 8,
+  },
+  submitButton: {
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 12,
+    paddingRight:12,
+    borderWidth: 1,
+    borderRadius: 8,
+    width: '50%',
+    alignSelf: 'center',
+    backgroundColor: 'black'
+  },
+  buttonTitle: {
+    fontSize: 32,
+    color: 'white',
+    textAlign:'center',
   }
 })
 
