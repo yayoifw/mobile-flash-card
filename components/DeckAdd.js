@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 class DeckAdd extends Component {
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    marginTop: Platform.OS === 'ios' ? 44 : 0,
+    backgroundColor: 'blue'
   },
   formLabel: {
     fontSize: 36,

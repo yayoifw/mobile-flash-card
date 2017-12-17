@@ -1,7 +1,7 @@
 // List of Decks
 // deskList = []
 import React, {Component} from 'react'
-import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet} from 'react-native'
+import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet, Platform} from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import Deck from './Deck'
 import DeckAdd from './DeckAdd'
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'orange'
+    backgroundColor: 'orange',
   },
   listCell: {
     padding: 12,
