@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} from 'react-native'
 import { StackNavigator } from 'react-navigation'
+import uuidv1 from 'uuid/v1'
+import {addDeck} from '../actions/decks'
 
 class DeckAdd extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -8,7 +10,17 @@ class DeckAdd extends Component {
   })
 
   state = {
-    value: ''
+    id: uuidv1(),
+    title: ''
+  }
+
+  onSubmit = (e) => {
+    var newDeck = {
+      id: this.state.id,
+      title: this.state.title,
+      cards: []
+    }
+    addDeck(newDeck)
   }
 
   render() {
@@ -16,9 +28,9 @@ class DeckAdd extends Component {
       <View stye={styles.container}>
         <Text style={styles.formLabel}>What is the title of your new deck?</Text>
         <TextInput style={styles.formInput}
-                   onChangeText={(text) => this.setState({ value: text})}
-                   value={this.state.value} placeholder="Deck Title"/>
-        <TouchableOpacity style={styles.submitButton}><Text style={styles.buttonTitle}>Submit</Text></TouchableOpacity>
+                   onChangeText={(text) => this.setState({ title: text })}
+                   value={this.state.title} placeholder="Deck Title"/>
+        <TouchableOpacity onPress={this.onSubmit} style={styles.submitButton}><Text style={styles.buttonTitle}>Submit</Text></TouchableOpacity>
       </View>
     );
   }

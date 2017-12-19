@@ -1,13 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Quiz from './components/Quiz'
-import DeckList from './components/DeckList'
+import {StyleSheet} from 'react-native'
+import store from './store'
+import {Provider} from 'react-redux'
 import HomeScreen from './components/HomeScreen'
+
 
 export default class App extends React.Component {
   render() {
     return (
+      <Provider store={store}>
         <HomeScreen />
+      </Provider>
     );
   }
 }

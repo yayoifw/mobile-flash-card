@@ -1,18 +1,23 @@
 import {DECK_ADD, DECK_DELETE, DECK_EDIT} from './index'
 
-export const votePost = (postId, voteType) => dispatch => {
-  api.votePost(postId, voteType).then(data => {
-    dispatch(votePostAction(data))
-  })
-}
+/**
+ *  Deck: {
+    key: number,
+    name: 'string',
+    cards: [1,2,3]
+  }
 
-export const addDeck = (title) => dispatch => {
-  dispatch(addDeckAction())
+ * @param postId
+ * @param voteType
+ */
+
+export const addDeck = (deck) => dispatch => {
+  dispatch(addDeckAction(deck))
 }
 
 const addDeckAction = (data) => ({
   type: DECK_ADD,
-  data
+  payload: data
 })
 
 const deleteDeckAction = (data) => ({
