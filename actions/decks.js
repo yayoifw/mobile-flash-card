@@ -1,4 +1,4 @@
-import {DECK_ADD, DECK_DELETE, DECK_EDIT} from './index'
+import {DECK_ADD, DECK_DELETE, DECK_EDIT, DECK_LIST_FETCH} from './index'
 
 /**
  *  Deck: {
@@ -11,11 +11,11 @@ import {DECK_ADD, DECK_DELETE, DECK_EDIT} from './index'
  * @param voteType
  */
 
-export const addDeck = (deck) => dispatch => {
-  dispatch(addDeckAction(deck))
-}
+export const fetchDeckAction = () => ({
+  type: DECK_LIST_FETCH
+})
 
-const addDeckAction = (data) => ({
+export const addDeckAction = (data) => ({
   type: DECK_ADD,
   payload: data
 })

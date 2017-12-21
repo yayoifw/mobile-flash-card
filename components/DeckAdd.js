@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import {connect} from 'react-redux'
+import {Alert, View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} from 'react-native'
+//import { StackNavigator } from 'react-navigation'
 import uuidv1 from 'uuid/v1'
-import {addDeck} from '../actions/decks'
+import {addDeckAction} from '../actions/decks'
 
 class DeckAdd extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -15,12 +16,19 @@ class DeckAdd extends Component {
   }
 
   onSubmit = (e) => {
-    var newDeck = {
-      id: this.state.id,
+    if (this.state.title.length === 0) {
+      Alert.alert(
+        'You need to enter the Deck Title'
+      )
+      return
+    }
+
+    let newDeck = {
+      key: this.state.id,
       title: this.state.title,
       cards: []
     }
-    addDeck(newDeck)
+    this.props.addDeck(newDeck)
   }
 
   render() {
@@ -75,4 +83,11 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DeckAdd
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addDeck: (deck) => dispatch(addDeckAction(deck))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DeckAdd)

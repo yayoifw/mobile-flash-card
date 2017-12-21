@@ -1,30 +1,12 @@
 // List of Decks
 // deskList = []
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet, Platform} from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import Deck from './Deck'
 import DeckAdd from './DeckAdd'
 import {Feather, Ionicons} from '@expo/vector-icons'
-
-const decks = [
-  {
-    key: 1,
-    name: 'udacicard',
-    cards: [1,2,3]
-  },
-  {
-    key: 2,
-    name: 'redux',
-    cards: [4,5,6,7,8,9]
-  },
-  {
-    key: 3,
-    name: 'react',
-    cards: []
-  }
-]
-
 
 class DeckList extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -48,7 +30,6 @@ class DeckList extends Component {
   }
 
   componentDidMount() {
-
   }
 
   onPressItem(item) {
@@ -75,13 +56,14 @@ class DeckList extends Component {
   }
 
   render() {
+    const { deckList } = this.props
     const { params } = this.props.navigation.state
     console.log(params)
 
     return (
       <View style={styles.container}>
         <FlatList
-          data={decks}
+          data={deckList}
           renderItem={this.renderItem}
         />
       </View>)
@@ -96,8 +78,6 @@ const StackNav = StackNavigator({
     screen: Deck
   },
 })
-
-export default DeckList
 
 const styles = StyleSheet.create({
   container: {
@@ -128,3 +108,15 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
   }
 })
+
+function mapStateToProps(state) {
+  return {
+    deckList: state.decks
+  }
+}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     fetchDecks: () => dispatch(fetchDeckAction())
+//   }
+// }
+export default connect(mapStateToProps, null)(DeckList)
