@@ -7,17 +7,23 @@ import { StackNavigator } from 'react-navigation'
 import Deck from './Deck'
 import DeckAdd from './DeckAdd'
 import {Feather, Ionicons} from '@expo/vector-icons'
+import {ScreenWithStatusBar} from './ScreenWithStatusBar'
 
 class DeckList extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const {params = {}} = navigation.state
-    return {
-      title: "DeckList",
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => {navigation.navigate('DeckAdd', { mode: 'add' })}}
-          style={styles.addButton}><Feather name="plus" size={32}/></TouchableOpacity>),
-    }
+  // static navigationOptions = ({ navigation }) => {
+  //   const {params = {}} = navigation.state
+  //   return {
+  //     title: "DeckList",
+  //     headerRight: (
+  //       <TouchableOpacity
+  //         onPress={() => {navigation.navigate('DeckAdd', { mode: 'add' })}}
+  //         style={styles.addButton}><Feather name="plus" size={32}/></TouchableOpacity>),
+  //   }
+  // }
+
+  // Hide StackNavigator's Header
+  static navigationOptions = {
+    header: null
   }
 
   state = {
@@ -34,7 +40,7 @@ class DeckList extends Component {
 
   onPressItem(item) {
     console.log(item)
-    this.props.navigation.navigate("Deck", { item })
+    this.props.navigation.navigate("DeckScreen", { item })
   }
 
   renderSeparator() {
@@ -66,7 +72,8 @@ class DeckList extends Component {
           data={deckList}
           renderItem={this.renderItem}
         />
-      </View>)
+      </View>
+      )
   }
 }
 

@@ -6,9 +6,10 @@ import uuidv1 from 'uuid/v1'
 import {addDeckAction} from '../actions/decks'
 
 class DeckAdd extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: "Add Deck"
-  })
+  // Hide StackNavigator's Header
+  static navigationOptions = {
+    header: null
+  }
 
   state = {
     id: uuidv1(),
