@@ -15,32 +15,35 @@ class Deck extends Component {
     title: `${navigation.state.params.item.name}`
   })
 
-  onPressAddCard(navigation) {
-    navigation.navigate("AddQuizScreen")
+  onPressAddCard(navigation, item) {
+    navigation.navigate("AddQuizScreen", { deck: item })
   }
 
-  onPressStartQuiz(navigation) {
-    navigation.navigate("QuizScreen")
+  onPressStartQuiz(navigation, item) {
+    navigation.navigate("QuizScreen", { deck: item, cardIndex:0 })
   }
 
   render() {
     const { params } = this.props.navigation.state
-    const { name, cards } = params.item
+    const { item } = params
+    const startQuizButtonDisabled = (item.cards.length === 0)
+    const startQuizButtonStyle = startQuizButtonDisabled ? styles.disabledButton : styles.blackButton
+    const startQuizButtonTitleStyle = startQuizButtonDisabled ? styles.disabledButtonTitle : styles.blackButtonTitle
 
     return (
       <View style={styles.container}>
         <View style={styles.mainView}>
-          <Text style={styles.deckTitle}>{name}</Text>
-          <Text style={styles.deckSubTitle}>No of cards: {cards.length}</Text>
+          <Text style={styles.deckTitle}>{item.name}</Text>
+          <Text style={styles.deckSubTitle}>{item.cards.length} cards</Text>
         </View>
         <View style={styles.controlGroupView}>
           <TouchableOpacity style={styles.whiteButton} onPress={() => {
-            this.onPressAddCard(this.props.navigation)}}>
+            this.onPressAddCard(this.props.navigation, item)}}>
             <Text style={styles.whiteButtonTitle}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.blackButton} onPress={() => {
-            this.onPressStartQuiz(this.props.navigation)}}>
-            <Text style={styles.blackButtonTitle}>Start Quiz</Text>
+          <TouchableOpacity disabled={startQuizButtonDisabled} style={startQuizButtonStyle} onPress={() => {
+            this.onPressStartQuiz(this.props.navigation, item)}}>
+            <Text style={startQuizButtonTitleStyle}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 32
   },
   whiteButtonTitle: {
-    fontSize: 32,
+    fontSize: 28,
     color: 'black',
     textAlign:'center',
   },
@@ -98,8 +101,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   blackButtonTitle: {
-    fontSize: 32,
+    fontSize: 28,
     color: 'white',
+    textAlign:'center',
+  },
+  disabledButton: {
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 12,
+    paddingRight:12,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: 'gray',
+    width: '50%',
+    alignSelf: 'center',
+    backgroundColor: 'gray'
+  },
+  disabledButtonTitle: {
+    fontSize: 28,
+    color: 'rgba(255, 255, 255, 0.7)',
     textAlign:'center',
   }
 })

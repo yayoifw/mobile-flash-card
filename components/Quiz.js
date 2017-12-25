@@ -8,16 +8,21 @@ import React, {Component} from 'react'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
 
 export default class Quiz extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.deck.name}`
+  })
+
   onPress() {
     alert('onPress')
   }
   render() {
+    const { params } = this.props.navigation.state
+    const { deck } = params
     return (
       <View style={styles.container}>
-        <View style={styles.header}><Text style={{flex:1}}>Header</Text></View>
         <View style={styles.content}>
           <View>
-            <Text>2/2</Text>
+            <Text>2/{deck.cards.length}</Text>
             <Text>Score: 80</Text>
             <Text>Quiz Question</Text>
             <TouchableHighlight onPress={this.onPress}><Text>show answer</Text></TouchableHighlight>
@@ -55,7 +60,6 @@ const styles = StyleSheet.create({
   },
   quizControlButton: {
     margin: 10,
-    fontSize: 12,
     height: 50,
     backgroundColor: 'blue',
     borderRadius: 8,
@@ -65,6 +69,7 @@ const styles = StyleSheet.create({
   },
   quizControlButtonTitle: {
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 12,
   }
 })
