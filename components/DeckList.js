@@ -3,11 +3,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet, Platform} from 'react-native'
-import { StackNavigator } from 'react-navigation'
-import Deck from './Deck'
-import DeckAdd from './DeckAdd'
-import {Feather, Ionicons} from '@expo/vector-icons'
-import {ScreenWithStatusBar} from './ScreenWithStatusBar'
+// import Deck from './Deck'
+// import DeckAdd from './DeckAdd'
+//import {Feather, Ionicons} from '@expo/vector-icons'
+import ScreenWithStatusBar from './ScreenWithStatusBar'
 
 class DeckList extends Component {
   // static navigationOptions = ({ navigation }) => {
@@ -67,24 +66,15 @@ class DeckList extends Component {
     console.log(params)
 
     return (
-      <View style={styles.container}>
+      <ScreenWithStatusBar>
         <FlatList
           data={deckList}
           renderItem={this.renderItem}
         />
-      </View>
-      )
+      </ScreenWithStatusBar>
+    )
   }
 }
-
-const StackNav = StackNavigator({
-  DeckList: {
-    screen: DeckList,
-  },
-  DeckDetails: {
-    screen: Deck
-  },
-})
 
 const styles = StyleSheet.create({
   container: {

@@ -4,6 +4,7 @@ import {Alert, View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} fr
 //import { StackNavigator } from 'react-navigation'
 import uuidv1 from 'uuid/v1'
 import {addDeckAction} from '../actions/decks'
+import ScreenWithStatusBar from './ScreenWithStatusBar'
 
 class DeckAdd extends Component {
   // Hide StackNavigator's Header
@@ -26,7 +27,7 @@ class DeckAdd extends Component {
 
     let newDeck = {
       key: this.state.id,
-      title: this.state.title,
+      name: this.state.title,
       cards: []
     }
     this.props.addDeck(newDeck)
@@ -34,13 +35,13 @@ class DeckAdd extends Component {
 
   render() {
     return (
-      <View stye={styles.container}>
+      <ScreenWithStatusBar>
         <Text style={styles.formLabel}>What is the title of your new deck?</Text>
         <TextInput style={styles.formInput}
                    onChangeText={(text) => this.setState({ title: text })}
                    value={this.state.title} placeholder="Deck Title"/>
         <TouchableOpacity onPress={this.onSubmit} style={styles.submitButton}><Text style={styles.buttonTitle}>Submit</Text></TouchableOpacity>
-      </View>
+      </ScreenWithStatusBar>
     );
   }
 }

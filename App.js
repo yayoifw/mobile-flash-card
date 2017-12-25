@@ -49,11 +49,18 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <ScreenWithStatusBar>
           <RootNavigator />
-        </ScreenWithStatusBar>
       </Provider>
     );
   }
+  // render() {
+  //   return (
+  //     <Provider store={store}>
+  //       <ScreenWithStatusBar>
+  //         <RootNavigator />
+  //       </ScreenWithStatusBar>
+  //     </Provider>
+  //   );
+  // }
 }
 
