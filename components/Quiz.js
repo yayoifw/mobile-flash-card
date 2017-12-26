@@ -6,11 +6,17 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
+import {fetchCard} from "../actions/cards";
 
 export default class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.deck.name}`
   })
+
+  componentDidMount() {
+    // const { params } = this.props.navigation.state
+    // fetchCard(params.cardId)
+  }
 
   onPress() {
     alert('onPress')
@@ -73,3 +79,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
   }
 })
+
+
+function mapStateToProps(state) {
+  return {
+    cards: state.cards
+  }
+}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     fetchDecks: () => dispatch(fetchDeckAction())
+//   }
+// }

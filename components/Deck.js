@@ -20,7 +20,8 @@ class Deck extends Component {
   }
 
   onPressStartQuiz(navigation, item) {
-    navigation.navigate("QuizScreen", { deck: item, cardIndex:0 })
+    const cardId = item.cards.length === 0 ? null : item.cards[0].id
+    navigation.navigate("QuizScreen", { deck: item, cardId: cardId })
   }
 
   render() {

@@ -1,4 +1,4 @@
-import {CARD_ADD, CARD_EDIT, CARD_DELETE} from "./index"
+import {CARD_FETCH, CARD_ADD, CARD_EDIT, CARD_DELETE} from "./index"
 
 /**
  * CARD = {
@@ -9,6 +9,11 @@ import {CARD_ADD, CARD_EDIT, CARD_DELETE} from "./index"
  * }
  **/
 
+export const fetchCard = (id) => ({
+  type: CARD_FETCH,
+  id
+})
+
 export const addCard = (card) => dispatch => {
   dispatch(addCard(card))
 }
@@ -18,7 +23,7 @@ const addCardAction = (data) => ({
   payload: data
 })
 
-const deleteDeckAction = (data) => ({
+const deleteCardAction = (data) => ({
   type: CARD_DELETE,
   payload: data
 })

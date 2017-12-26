@@ -37,6 +37,8 @@ class DeckList extends Component {
   componentDidMount() {
   }
 
+  listKeyExtractor = (item, index) => item.id
+
   onPressItem(item) {
     console.log(item)
     this.props.navigation.navigate("DeckScreen", { item })
@@ -68,6 +70,7 @@ class DeckList extends Component {
     return (
       <ScreenWithStatusBar>
         <FlatList
+          keyExtractor={this.listKeyExtractor}
           data={deckList}
           renderItem={this.renderItem}
         />

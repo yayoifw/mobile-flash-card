@@ -5,20 +5,40 @@ import {logger} from 'redux-logger'
 const initialState = {
   decks: [
     {
-      key: 'a',
+      id: 'a',
       name: 'udacicard',
       cards: [1,2,3]
     },
     {
-      key: 'b',
-      name: 'redux',
-      cards: [4,5,6,7,8,9]
+      id: 'b',
+      name: 'Redux',
+      cards: [1,2,3]
     },
     {
-      key: 'c',
+      id: 'c',
       name: 'react',
       cards: []
     }
+  ],
+  cards: [
+    {
+      id: '1',
+      parentId: 'b',
+      question: 'The state of your whole application is stored in an object tree within a single store.',
+      answer: 'Correct. Store is the single source of truth.'
+    },
+    {
+      id: '2',
+      parentId: 'b',
+      question: 'The only way to change the state is to emit an action, an object describing what happened.',
+      answer: 'Correct. State is read only.'
+    },
+    {
+      id: '3',
+      parentId: 'b',
+      question: 'To specify how the state tree is transformed by actions, you write functional component.',
+      answer: 'Incorrect. You write pure reducers.'
+    },
   ]
 }
 
