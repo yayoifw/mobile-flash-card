@@ -49,6 +49,15 @@ class Quiz extends Component {
     }
   }
 
+
+  onPressStartQuiz() {
+    this.setState({
+        cardIndex: 0,
+        noOfCorrectAnswers: 0,
+        quizCompleted: false
+    })
+  }
+
   findCard(deck, cardIndex) {
     const cardId = deck.cards[cardIndex]
     return this.props.cards.find(item => (item.id === cardId))
@@ -66,9 +75,13 @@ class Quiz extends Component {
         <View style={styles.container}>
           <View style={styles.mainContent}>
             <Text>{this.state.cardIndex + 1} / {deck.cards.length}</Text>
-            <Text style={styles.title}>You have {percentCorrect} % correct Answers!</Text>
+            <Text style={styles.title}>Your score is {percentCorrect} %!</Text>
           </View>
           <View style={styles.quizControl}>
+            <TouchableHighlight style={[styles.quizControlButton, {backgroundColor:'black'}]}
+                                onPress={() => this.onPressStartQuiz()}>
+              <Text style={styles.quizControlButtonTitle}>ReStart Quiz</Text>
+            </TouchableHighlight>
             <TouchableHighlight style={[styles.quizControlButton, {backgroundColor:'black'}]}
                                 onPress={() => this.onPressHomeScreen(this.props.navigation)}>
               <Text style={styles.quizControlButtonTitle}>Deck List</Text>
