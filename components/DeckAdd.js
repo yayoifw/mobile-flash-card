@@ -31,6 +31,7 @@ class DeckAdd extends Component {
       cards: []
     }
     this.props.addDeck(newDeck)
+    this.props.navigation.navigate('DeckList')
   }
 
   render() {
