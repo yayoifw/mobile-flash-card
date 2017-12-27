@@ -21,7 +21,7 @@ class Deck extends Component {
 
   onPressStartQuiz(navigation, item) {
     const cardId = item.cards.length === 0 ? null : item.cards[0].id
-    navigation.navigate("QuizScreen", { deck: item, cardId: cardId })
+    navigation.navigate("QuizScreen", { deck: item, cardIndex: 0 })
   }
 
   render() {
