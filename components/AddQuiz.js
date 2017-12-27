@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import {Alert, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import uuidv1 from 'uuid/v1'
 import {addCardAction} from '../actions/cards'
 

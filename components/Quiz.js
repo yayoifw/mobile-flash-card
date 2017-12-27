@@ -41,7 +41,6 @@ class Quiz extends Component {
       })
     } else {
       // reached the end of quiz
-      alert('End of Quiz. no of correct answer='+noOfCorrectAnswers)
       this.setState({
         quizCompleted:true,
         noOfCorrectAnswers
