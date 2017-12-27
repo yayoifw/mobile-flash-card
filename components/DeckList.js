@@ -3,23 +3,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet, Platform} from 'react-native'
-// import Deck from './Deck'
-// import DeckAdd from './DeckAdd'
-//import {Feather, Ionicons} from '@expo/vector-icons'
 import ScreenWithStatusBar from './ScreenWithStatusBar'
 
 class DeckList extends Component {
-  // static navigationOptions = ({ navigation }) => {
-  //   const {params = {}} = navigation.state
-  //   return {
-  //     title: "DeckList",
-  //     headerRight: (
-  //       <TouchableOpacity
-  //         onPress={() => {navigation.navigate('DeckAdd', { mode: 'add' })}}
-  //         style={styles.addButton}><Feather name="plus" size={32}/></TouchableOpacity>),
-  //   }
-  // }
-
   // Hide StackNavigator's Header
   static navigationOptions = {
     header: null
@@ -53,12 +39,12 @@ class DeckList extends Component {
     const { name, cards } = item
     const noOfCards = cards.length
     return (
-      <View style={styles.listCell}>
-        <TouchableOpacity onPress={() => {this.onPressItem(item)}}>
+      <TouchableHighlight underlayColor={'#a0a1a2'} onPress={() => {this.onPressItem(item)}}>
+        <View style={styles.listCell}>
           <Text style={styles.listTitle}>{name}</Text>
           <Text style={styles.listSubTitle}>{noOfCards} cards</Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableHighlight>
     )
   }
 
