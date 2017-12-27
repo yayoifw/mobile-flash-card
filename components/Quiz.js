@@ -49,7 +49,7 @@ class Quiz extends Component {
     }
   }
 
-  getCard(deck, cardIndex) {
+  findCard(deck, cardIndex) {
     const cardId = deck.cards[cardIndex]
     return this.props.cards.find(item => (item.id === cardId))
   }
@@ -57,7 +57,7 @@ class Quiz extends Component {
   render() {
     const {params} = this.props.navigation.state
     const {deck} = params
-    const card = this.getCard(deck, this.state.cardIndex)
+    const card = this.findCard(deck, this.state.cardIndex)
 
     if (this.state.quizCompleted) {
       const percentCorrect = Math.round((this.state.noOfCorrectAnswers / deck.cards.length) * 100)

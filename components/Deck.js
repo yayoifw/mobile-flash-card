@@ -9,10 +9,11 @@
 
 import React, { Component } from 'react'
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
+import {connect} from 'react-redux'
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.item.name}`
+    title: `${navigation.state.params.deckName}`
   })
 
   onPressAddCard(navigation, item) {
@@ -24,26 +25,31 @@ class Deck extends Component {
     navigation.navigate("QuizScreen", { deck: item, cardIndex: 0 })
   }
 
+  findDeck(decks, deckId) {
+    return decks.find(item => (item.id === deckId))
+  }
+
   render() {
     const { params } = this.props.navigation.state
-    const { item } = params
-    const startQuizButtonDisabled = (item.cards.length === 0)
+    const { deckId } = params
+    const deck = this.findDeck(this.props.decks, deckId)
+    const startQuizButtonDisabled = (deck.cards.length === 0)
     const startQuizButtonStyle = startQuizButtonDisabled ? styles.disabledButton : styles.blackButton
     const startQuizButtonTitleStyle = startQuizButtonDisabled ? styles.disabledButtonTitle : styles.blackButtonTitle
 
     return (
       <View style={styles.container}>
         <View style={styles.mainView}>
-          <Text style={styles.deckTitle}>{item.name}</Text>
-          <Text style={styles.deckSubTitle}>{item.cards.length} cards</Text>
+          <Text style={styles.deckTitle}>{deck.name}</Text>
+          <Text style={styles.deckSubTitle}>{deck.cards.length} cards</Text>
         </View>
         <View style={styles.controlGroupView}>
           <TouchableOpacity style={styles.whiteButton} onPress={() => {
-            this.onPressAddCard(this.props.navigation, item)}}>
+            this.onPressAddCard(this.props.navigation, deck)}}>
             <Text style={styles.whiteButtonTitle}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity disabled={startQuizButtonDisabled} style={startQuizButtonStyle} onPress={() => {
-            this.onPressStartQuiz(this.props.navigation, item)}}>
+            this.onPressStartQuiz(this.props.navigation, deck)}}>
             <Text style={startQuizButtonTitleStyle}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
@@ -124,4 +130,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Deck
+const mapStateToProps = (state) => ({
+  decks: state.decks
+})
+
+export default connect(mapStateToProps, null)(Deck)

@@ -41,7 +41,7 @@ class DeckList extends Component {
 
   onPressItem(item) {
     console.log(item)
-    this.props.navigation.navigate("DeckScreen", { item })
+    this.props.navigation.navigate("DeckScreen", { deckId: item.id, deckName: item.name })
   }
 
   renderSeparator() {
