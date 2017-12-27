@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import {Platform, Alert, View, Text, StyleSheet, TextInput, TouchableOpacity, CheckBox} from 'react-native'
 import uuidv1 from 'uuid/v1'
 import {addCardAction} from '../actions/cards'
+import { CheckBox } from 'react-native-elements'
 
 class AddQuiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -37,9 +38,27 @@ class AddQuiz extends Component {
     this.props.addCard(newCard)
   }
 
+  // renderCheckBox() {
+  //   if (Platform.OS === 'ios') {
+  //     return (
+  //       <Switch
+  //         value={this.state.isCorrect}
+  //         onValueChange={() => this.setState({ isCorrect: !this.state.isCorrect })}
+  //       />)
+  //   } else {
+  //     return (
+  //       <CheckBox
+  //         value={this.state.isCorrect}
+  //         onValueChange={() => this.setState({ isCorrect: !this.state.isCorrect })}
+  //       />
+  //     )
+  //   }
+  // }
+
   render() {
     const { params } = this.props.navigation.state
     const { deck } = params
+
     return (
       <View style={styles.container}>
         <TextInput style={styles.formInput}
@@ -48,6 +67,7 @@ class AddQuiz extends Component {
         <TextInput style={styles.formInput}
                    onChangeText={(text) => this.setState({ answer: text })}
                    value={this.state.title} placeholder="Answer"/>
+        {/*this.renderCheckBox()*/}
         <TouchableOpacity onPress={() => this.onAddCardSubmit(deck)} style={styles.submitButton}>
           <Text style={styles.buttonTitle}>Submit</Text>
         </TouchableOpacity>

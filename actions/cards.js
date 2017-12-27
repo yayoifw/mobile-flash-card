@@ -14,11 +14,7 @@ export const fetchCard = (id) => ({
   id
 })
 
-export const addCard = (card) => dispatch => {
-  dispatch(addCard(card))
-}
-
-const addCardAction = (data) => ({
+export const addCardAction = (data) => ({
   type: CARD_ADD,
   payload: data
 })

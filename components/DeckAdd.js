@@ -26,7 +26,7 @@ class DeckAdd extends Component {
     }
 
     let newDeck = {
-      key: this.state.id,
+      id: this.state.id,
       name: this.state.title,
       cards: []
     }
