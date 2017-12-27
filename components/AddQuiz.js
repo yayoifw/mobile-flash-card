@@ -16,7 +16,7 @@ class AddQuiz extends Component {
     isCorrect: false
   }
 
-  onAddCardSubmit = (deck) => {
+  onAddCardSubmit = (navigation, deck) => {
     if (this.state.question.length === 0) {
       Alert.alert('You need to enter the question.')
       return
@@ -35,6 +35,7 @@ class AddQuiz extends Component {
       isCorrectAnswer: this.state.isCorrect
     }
     this.props.addCard(newCard)
+    navigation.navigate("DeckScreen", { deckId: deck.id, deckName: deck.name })
   }
 
   render() {
@@ -48,7 +49,7 @@ class AddQuiz extends Component {
         <TextInput style={styles.formInput}
                    onChangeText={(text) => this.setState({ answer: text })}
                    value={this.state.title} placeholder="Answer"/>
-        <TouchableOpacity onPress={() => this.onAddCardSubmit(deck)} style={styles.submitButton}>
+        <TouchableOpacity onPress={() => this.onAddCardSubmit(this.props.navigation, deck)} style={styles.submitButton}>
           <Text style={styles.buttonTitle}>Submit</Text>
         </TouchableOpacity>
       </View>
