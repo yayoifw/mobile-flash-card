@@ -8,7 +8,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
 import Card from './Card'
-import {fetchCard} from "../actions/cards";
+//import {fetchCard} from "../actions/cards";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -19,6 +19,10 @@ class Quiz extends Component {
     cardIndex: 0,
     noOfCorrectAnswers: 0,
     quizCompleted: false
+  }
+
+  onPressHomeScreen = (navigation) => {
+    navigation.navigate("HomeScreen")
   }
 
   onButtonPress = (deck, isCorrectAnswer) => {
@@ -56,13 +60,19 @@ class Quiz extends Component {
     const card = this.getCard(deck, this.state.cardIndex)
 
     if (this.state.quizCompleted) {
-      const percentCorrect = (this.state.noOfCorrectAnswers / deck.cards.length) * 100
+      const percentCorrect = Math.round((this.state.noOfCorrectAnswers / deck.cards.length) * 100)
 
       return (
         <View style={styles.container}>
           <View style={styles.mainContent}>
             <Text>{this.state.cardIndex + 1} / {deck.cards.length}</Text>
-            <Text>{percentCorrect} % Correct Answers</Text>
+            <Text style={styles.title}>You have {percentCorrect} % correct Answers!</Text>
+          </View>
+          <View style={styles.quizControl}>
+            <TouchableHighlight style={[styles.quizControlButton, {backgroundColor:'black'}]}
+                                onPress={() => this.onPressHomeScreen(this.props.navigation)}>
+              <Text style={styles.quizControlButtonTitle}>Deck List</Text>
+            </TouchableHighlight>
           </View>
         </View>
       )
@@ -75,11 +85,11 @@ class Quiz extends Component {
           <Card card={card}/>
         </View>
         <View style={styles.quizControl}>
-          <TouchableHighlight style={styles.quizControlButton}
+          <TouchableHighlight style={[styles.quizControlButton, { backgroundColor: 'green'}]}
                               onPress={() => this.onButtonPress(deck, card.isCorrectAnswer)}>
             <Text style={styles.quizControlButtonTitle}>Correct</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.quizControlButton}
+          <TouchableHighlight style={[styles.quizControlButton, { backgroundColor: 'red'}]}
                               onPress={() => this.onButtonPress(deck, !card.isCorrectAnswer)}>
             <Text style={styles.quizControlButtonTitle}>InCorrect</Text>
           </TouchableHighlight>
@@ -93,7 +103,6 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     padding:16,
-    backgroundColor: 'orange'
   },
   mainContent: {
     flex:2,
@@ -108,12 +117,10 @@ const styles = StyleSheet.create({
   },
   quizControl: {
     flex:1,
-    backgroundColor: '#F0F8FF'
   },
   quizControlButton: {
     margin: 10,
     height: 50,
-    backgroundColor: 'blue',
     borderRadius: 8,
     borderWidth: 1,
     justifyContent: 'center',
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
   quizControlButtonTitle: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 18,
   }
 })
 

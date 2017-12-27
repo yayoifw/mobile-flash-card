@@ -55,7 +55,6 @@ class Deck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'orange',
   },
   mainView: {
     flex: 2,
