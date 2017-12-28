@@ -32,7 +32,7 @@ export function initDatabase() {
 }
 
 function decksObjToArrayList(decksObj) {
-  return decksObj.values()
+  return Object.values(decksObj)
 }
 
 // returns all of the decks along with their titles, questions, and answers.

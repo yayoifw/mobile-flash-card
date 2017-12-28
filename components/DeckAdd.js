@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Alert, View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} from 'react-native'
-//import { StackNavigator } from 'react-navigation'
-//import uuidv1 from 'uuid/v1'
 import {addDeckAction} from '../actions/decks'
 import ScreenWithStatusBar from './ScreenWithStatusBar'
+import {saveDeckTitle} from '../utils/api'
 
 class DeckAdd extends Component {
   // Hide StackNavigator's Header
@@ -36,6 +35,7 @@ class DeckAdd extends Component {
       questions: []
     }
     this.props.addDeck(newDeck)
+    saveDeckTitle(title)
     this.props.navigation.navigate('DeckList')
   }
 

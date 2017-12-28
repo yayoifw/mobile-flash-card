@@ -23,7 +23,10 @@ class DeckList extends Component {
   }
 
   componentDidMount() {
-    getDecks().then(decks => this.props.decksLoaded(decks))
+    const {decksLoaded} = this.props
+    getDecks().then(decks => {
+      decksLoaded(decks)
+    })
   }
 
   listKeyExtractor = (item, index) => item.title
@@ -107,4 +110,5 @@ function mapDispatchToProps(dispatch) {
     decksLoaded: (decks) => dispatch(decksLoadedAction(decks))
   }
 }
-export default connect(mapStateToProps, null)(DeckList)
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList)

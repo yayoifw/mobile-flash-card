@@ -2,10 +2,9 @@ import {CARD_FETCH, CARD_ADD, CARD_EDIT, CARD_DELETE} from "./index"
 
 /**
  * CARD = {
- *   id: 123,
  *   question: 'question',
  *   answer: 'answer',
- *   parentId: 456
+ *   parentId: "parent title"
  * }
  **/
 
@@ -14,9 +13,9 @@ export const fetchCard = (id) => ({
   id
 })
 
-export const addCardAction = (data) => ({
+export const addCardAction = (card, parentId) => ({
   type: CARD_ADD,
-  payload: data
+  payload: { card, parentId }
 })
 
 const deleteCardAction = (data) => ({

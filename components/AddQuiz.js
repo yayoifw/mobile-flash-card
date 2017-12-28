@@ -3,39 +3,39 @@ import {connect} from 'react-redux'
 import {Alert, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import uuidv1 from 'uuid/v1'
 import {addCardAction} from '../actions/cards'
+import {addcardToDeck} from '../utils/api'
+
 
 class AddQuiz extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Add Quiz'
+    title: `Add Quiz in ${navigation.state.params.deck.title}`
   })
 
   state = {
-    id: uuidv1(),
     question: '',
     answer: '',
-    isCorrect: false
   }
 
   onAddCardSubmit = (navigation, deck) => {
-    if (this.state.question.length === 0) {
+    const question = this.state.question.trim()
+    if (question.length === 0) {
       Alert.alert('You need to enter the question.')
       return
     }
 
-    if (this.state.answer.length === 0) {
+    const answer = this.state.answer.trim()
+    if (answer.length === 0) {
       Alert.alert('You need to enter the answer.')
       return
     }
 
     let newCard = {
-      id: this.state.id,
-      parentId: deck.id,
-      question: this.state.question,
-      answer: this.state.answer,
-      isCorrectAnswer: this.state.isCorrect
+      question: question,
+      answer: answer,
     }
-    this.props.addCard(newCard)
-    navigation.navigate("DeckScreen", { deckId: deck.id, deckName: deck.name })
+    this.props.addCard(newCard, deck.title)
+    addcardToDeck(deck.title, newCard)
+    navigation.goBack()
   }
 
   render() {
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return {
-    addCard: (card) => dispatch(addCardAction(card))
+    addCard: (card, parentId) => dispatch(addCardAction(card, parentId))
   }
 }
 

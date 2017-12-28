@@ -9,7 +9,7 @@ import DeckList from './components/DeckList'
 import DeckAdd from './components/DeckAdd'
 import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
 
-import {initDatabase, getDecks, getDeck, saveDeckTitle} from './utils/api'
+import {initDatabase} from './utils/api'
 
 
 const TabNav = TabNavigator({
@@ -52,11 +52,10 @@ export default class App extends React.Component {
     initDatabase()
   }
 
-  render() {
-    getDecks().then(decks => console.log('decks=', decks))
-    const aDeck = getDeck('JavaScript')
-    saveDeckTitle('NEW ABC')
+  componentDidMount() {
+  }
 
+  render() {
     return (
       <Provider store={store}>
           <RootNavigator />

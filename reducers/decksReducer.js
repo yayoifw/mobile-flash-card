@@ -9,11 +9,11 @@ function decks(state = [], action) {
   switch (action.type) {
     case CARD_ADD:
     {
-      const card = action.payload
+      const {card, parentId} = action.payload
       return state.map(deck => {
-        if (deck.id === card.parentId) {
+        if (deck.title === parentId) {
           // found a parent deck
-          deck.cards.push(card.id)
+          deck.questions.push(card)
         }
         return deck
       })
@@ -21,7 +21,7 @@ function decks(state = [], action) {
     break;
 
     case DECK_LIST_LOADED:
-      return state
+      return action.payload
 
     case DECK_ADD:
       return [...state, action.payload]
