@@ -39,17 +39,10 @@ export function setLocalNotification() {
               tomorrow.setHours(20)
               tomorrow.setMinutes(0)
 
-              // const schedulingOptions = {
-              //   time: tomorrow,
-              //   repeat: 'day',
-              // }
-
-              let t = new Date();
-              t.setSeconds(t.getSeconds() + 10);
               const schedulingOptions = {
-                time: t, // (date or number) — A Date object representing when to fire the notification or a number in Unix epoch time. Example: (new Date()).getTime() + 1000 is one second from now.
-                repeat: 'minute'
-              };
+                time: tomorrow,
+                repeat: 'day',
+              }
 
               Notifications.scheduleLocalNotificationAsync(
                 createLocalNotification(),
