@@ -1,4 +1,5 @@
 import React from 'react';
+import {Platform, StatusBar} from 'react-native'
 import store from './utils/store'
 import {Provider} from 'react-redux'
 import {TabNavigator, StackNavigator} from 'react-navigation'
@@ -27,7 +28,10 @@ const TabNav = TabNavigator({
       tabBarIcon: ({ tintColor }) => <MaterialIcons name="add-to-photos" size={32} color={tintColor} />
     }
   }
-})
+}, { tabBarOptions: { style: { backgroundColor: 'rgb(64,64,64)' } } })
+// Note: If using TabBar, marginTop: is needed for Android to avoid Tab overlaps with StatusBar.
+// { tabBarOptions: { style: { backgroundColor: 'rgb(64,64,64)', marginTop: Platform.OS === 'ios' ? 0 : 24} }
+// But since it is nested in StackNavigator, below paddingTop in StackNavigator 2nd parm will take care of it.
 
 const RootNavigator = StackNavigator({
   HomeScreen: {
@@ -43,8 +47,13 @@ const RootNavigator = StackNavigator({
     screen: AddQuiz
   }
 }, {
-  headerMode: 'screen'
+  headerMode: 'screen',
+  cardStyle: {
+    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+  }
 })
+// Note: paddingTop: is needed for Android to avoid Tab overlap with StatusBar
+
 
 export default class App extends React.Component {
   constructor(props) {
