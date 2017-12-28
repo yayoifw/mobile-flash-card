@@ -8,12 +8,17 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
 import Card from './Card'
-//import {fetchCard} from "../actions/cards";
+import {clearLocalNotification, setLocalNotification} from 'expo'
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.deck.title}`
   })
+
+  componentDidMount() {
+    // If quiz page is invoked, clear existing notification and set a new notification for tomorrow.
+    clearLocalNotification().then(setLocalNotification)
+  }
 
   state = {
     cardIndex: 0,

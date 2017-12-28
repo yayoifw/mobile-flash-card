@@ -9,8 +9,8 @@ import AddQuiz from './components/AddQuiz'
 import DeckList from './components/DeckList'
 import DeckAdd from './components/DeckAdd'
 import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
-
 import {initDatabase} from './utils/api'
+import {setLocalNotification} from './utils/notification'
 
 
 const TabNav = TabNavigator({
@@ -62,6 +62,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    setLocalNotification()
   }
 
   render() {
