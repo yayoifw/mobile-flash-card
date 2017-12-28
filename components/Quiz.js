@@ -72,8 +72,8 @@ class Quiz extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.mainContent}>
-            <Text style={styles.title}>You have completed {deck.questions.length} Quiz.</Text>
-            <Text style={styles.title}>Your score is {percentCorrect} %!</Text>
+            <Text style={styles.title}>You have completed {deck.questions.length} Quiz. Your score is:</Text>
+            <Text style={styles.title}>{percentCorrect} %</Text>
           </View>
           <View style={styles.quizControl}>
             <TouchableHighlight style={[styles.quizControlButton, {backgroundColor:'black'}]}
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    textAlign: 'center'
   },
   answer: {
     fontSize: 18,
