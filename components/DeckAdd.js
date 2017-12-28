@@ -4,6 +4,7 @@ import {Alert, View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} fr
 import {addDeckAction} from '../actions/decks'
 import ScreenWithStatusBar from './ScreenWithStatusBar'
 import {saveDeckTitle} from '../utils/api'
+import {globalStyles} from '../utils/globalStyles'
 
 class DeckAdd extends Component {
   // Hide StackNavigator's Header
@@ -42,11 +43,13 @@ class DeckAdd extends Component {
   render() {
     return (
       <ScreenWithStatusBar>
-        <Text style={styles.formLabel}>What is the title of your new deck?</Text>
-        <TextInput style={styles.formInput}
+        <Text style={globalStyles.formLabel}>What is the title of your new deck?</Text>
+        <TextInput style={globalStyles.formInput}
                    onChangeText={(text) => this.setState({ title: text })}
                    value={this.state.title} placeholder="Deck Title"/>
-        <TouchableOpacity onPress={this.onSubmit} style={styles.submitButton}><Text style={styles.buttonTitle}>Submit</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.onSubmit} style={globalStyles.submitButton}>
+          <Text style={globalStyles.submitButtonTitle}>Submit</Text>
+        </TouchableOpacity>
       </ScreenWithStatusBar>
     );
   }
@@ -59,35 +62,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     marginTop: Platform.OS === 'ios' ? 44 : 0,
     backgroundColor: 'blue'
-  },
-  formLabel: {
-    fontSize: 36,
-    margin: 12,
-    textAlign: 'center'
-  },
-  formInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 8,
-    margin: 12,
-    padding: 8,
-  },
-  submitButton: {
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingLeft: 12,
-    paddingRight:12,
-    borderWidth: 1,
-    borderRadius: 8,
-    width: '50%',
-    alignSelf: 'center',
-    backgroundColor: 'black'
-  },
-  buttonTitle: {
-    fontSize: 32,
-    color: 'white',
-    textAlign:'center',
   }
 })
 

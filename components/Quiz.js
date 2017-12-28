@@ -8,7 +8,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native'
 import Card from './Card'
-import {clearLocalNotification, setLocalNotification} from 'expo'
+import {clearLocalNotification, setLocalNotification} from '../utils/notification'
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({

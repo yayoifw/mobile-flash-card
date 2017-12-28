@@ -4,6 +4,7 @@ import {Alert, View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-
 import uuidv1 from 'uuid/v1'
 import {addCardAction} from '../actions/cards'
 import {addcardToDeck} from '../utils/api'
+import {globalStyles} from '../utils/globalStyles'
 
 
 class AddQuiz extends Component {
@@ -43,14 +44,14 @@ class AddQuiz extends Component {
     const { deck } = params
     return (
       <View style={styles.container}>
-        <TextInput style={styles.formInput}
+        <TextInput style={globalStyles.formInput}
                    onChangeText={(text) => this.setState({ question: text })}
                    value={this.state.title} placeholder="Question"/>
-        <TextInput style={styles.formInput}
+        <TextInput style={globalStyles.formInput}
                    onChangeText={(text) => this.setState({ answer: text })}
                    value={this.state.title} placeholder="Answer"/>
-        <TouchableOpacity onPress={() => this.onAddCardSubmit(this.props.navigation, deck)} style={styles.submitButton}>
-          <Text style={styles.buttonTitle}>Submit</Text>
+        <TouchableOpacity onPress={() => this.onAddCardSubmit(this.props.navigation, deck)} style={globalStyles.submitButton}>
+          <Text style={globalStyles.submitButtonTitle}>Submit</Text>
         </TouchableOpacity>
       </View>
     )
@@ -60,30 +61,6 @@ class AddQuiz extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  formInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 8,
-    margin: 12,
-    padding: 8,
-  },
-  submitButton: {
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingLeft: 12,
-    paddingRight:12,
-    borderWidth: 1,
-    borderRadius: 8,
-    width: '50%',
-    alignSelf: 'center',
-    backgroundColor: 'black'
-  },
-  buttonTitle: {
-    fontSize: 32,
-    color: 'white',
-    textAlign:'center',
   }
 })
 
