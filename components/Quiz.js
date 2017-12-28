@@ -97,11 +97,11 @@ class Quiz extends Component {
         </View>
         <View style={styles.quizControl}>
           <TouchableHighlight style={[styles.quizControlButton, { backgroundColor: 'green'}]}
-                              onPress={() => this.onButtonPress(deck, card.isCorrectAnswer)}>
+                              onPress={() => this.onButtonPress(deck, true)}>
             <Text style={styles.quizControlButtonTitle}>Correct</Text>
           </TouchableHighlight>
           <TouchableHighlight style={[styles.quizControlButton, { backgroundColor: 'red'}]}
-                              onPress={() => this.onButtonPress(deck, !card.isCorrectAnswer)}>
+                              onPress={() => this.onButtonPress(deck, false)}>
             <Text style={styles.quizControlButtonTitle}>InCorrect</Text>
           </TouchableHighlight>
         </View>

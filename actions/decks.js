@@ -1,10 +1,9 @@
-import {DECK_ADD, DECK_DELETE, DECK_EDIT, DECK_LIST_LOADED} from './index'
+import {DECK_ADD, DECK_DELETE, DECK_LIST_LOADED} from './index'
 
 /**
  *  Deck: {
-    key: number,
-    name: 'string',
-    cards: [1,2,3]
+    title: 'string',
+    questions: []
   }
 
  * @param postId
@@ -23,10 +22,5 @@ export const addDeckAction = (data) => ({
 
 const deleteDeckAction = (data) => ({
   type: DECK_DELETE,
-  data
-})
-
-const editDeckAction = (data) => ({
-  type: DECK_EDIT,
   data
 })

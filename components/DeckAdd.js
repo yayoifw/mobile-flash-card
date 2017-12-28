@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Alert, View, Text, TextInput, StyleSheet, TouchableOpacity, Platform} from 'react-native'
 //import { StackNavigator } from 'react-navigation'
-import uuidv1 from 'uuid/v1'
+//import uuidv1 from 'uuid/v1'
 import {addDeckAction} from '../actions/decks'
 import ScreenWithStatusBar from './ScreenWithStatusBar'
 
@@ -13,22 +13,27 @@ class DeckAdd extends Component {
   }
 
   state = {
-    id: uuidv1(),
     title: ''
   }
 
   onSubmit = (e) => {
-    if (this.state.title.length === 0) {
+    const title = this.state.title.trim()
+    if (title === '') {
       Alert.alert(
         'You need to enter the Deck Title'
       )
       return
     }
 
+    // reset state
+    this.setState({
+      title:''
+    })
+
+    // add deck
     let newDeck = {
-      id: this.state.id,
-      name: this.state.title,
-      cards: []
+      title: title,
+      questions: []
     }
     this.props.addDeck(newDeck)
     this.props.navigation.navigate('DeckList')

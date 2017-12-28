@@ -1,8 +1,7 @@
 import {
-  DECK_LIST_FETCH,
+  DECK_LIST_LOADED,
   DECK_ADD,
   DECK_DELETE,
-  DECK_EDIT,
   CARD_ADD
 } from './../actions'
 
@@ -21,17 +20,14 @@ function decks(state = [], action) {
     }
     break;
 
-    case DECK_LIST_FETCH:
+    case DECK_LIST_LOADED:
       return state
 
     case DECK_ADD:
       return [...state, action.payload]
 
     case DECK_DELETE:
-      return state.filter(item => item.id !== action.payload.id);
-
-    case DECK_EDIT:
-      return state.map(item => ((item.id === action.payload.id) ? action.payload : item))
+      return state.filter(item => item.title !== action.payload.title);
 
     default:
   }
