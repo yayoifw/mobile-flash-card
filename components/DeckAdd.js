@@ -34,7 +34,7 @@ class DeckAdd extends Component {
       title: title,
       questions: []
     }
-    this.props.addDeck(newDeck)
+    this.props.addDeckAction(newDeck)
     saveDeckTitle(title)
     this.props.navigation.navigate("DeckScreen", { deckId: title, deckName: title })
   }
@@ -91,11 +91,4 @@ const styles = StyleSheet.create({
   }
 })
 
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addDeck: (deck) => dispatch(addDeckAction(deck))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(DeckAdd)
+export default connect(null, {addDeckAction})(DeckAdd)
