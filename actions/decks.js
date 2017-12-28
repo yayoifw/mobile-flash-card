@@ -1,4 +1,4 @@
-import {DECK_ADD, DECK_DELETE, DECK_EDIT, DECK_LIST_FETCH} from './index'
+import {DECK_ADD, DECK_DELETE, DECK_EDIT, DECK_LIST_LOADED} from './index'
 
 /**
  *  Deck: {
@@ -11,8 +11,9 @@ import {DECK_ADD, DECK_DELETE, DECK_EDIT, DECK_LIST_FETCH} from './index'
  * @param voteType
  */
 
-export const fetchDeckAction = () => ({
-  type: DECK_LIST_FETCH
+export const decksLoadedAction = (decks) => ({
+  type: DECK_LIST_LOADED,
+  payload: decks
 })
 
 export const addDeckAction = (data) => ({

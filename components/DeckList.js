@@ -4,6 +4,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet, Platform} from 'react-native'
 import ScreenWithStatusBar from './ScreenWithStatusBar'
+import {decksLoadedAction} from '../actions/decks'
+import {getDecks, getDeck, saveDeckTitle} from '../utils/api'
+
 
 class DeckList extends Component {
   // Hide StackNavigator's Header
@@ -17,17 +20,16 @@ class DeckList extends Component {
 
   constructor(props) {
     super(props)
-    console.log('constructor', props)
   }
 
   componentDidMount() {
+    getDecks().then(decks => this.props.decksLoaded(decks))
   }
 
-  listKeyExtractor = (item, index) => item.id
+  listKeyExtractor = (item, index) => item.title
 
   onPressItem(item) {
-    console.log(item)
-    this.props.navigation.navigate("DeckScreen", { deckId: item.id, deckName: item.name })
+    this.props.navigation.navigate("DeckScreen", { deckId: item.title, deckName: item.title })
   }
 
   renderSeparator() {
@@ -36,12 +38,12 @@ class DeckList extends Component {
 
   // Define a func as class property. 'this' obj is bind in enclosing scope.
   renderItem = ({item}) => {
-    const { name, cards } = item
-    const noOfCards = cards.length
+    const { title, questions } = item
+    const noOfCards = questions.length
     return (
       <TouchableHighlight underlayColor={'#a0a1a2'} onPress={() => {this.onPressItem(item)}}>
         <View style={styles.listCell}>
-          <Text style={styles.listTitle}>{name}</Text>
+          <Text style={styles.listTitle}>{title}</Text>
           <Text style={styles.listSubTitle}>{noOfCards} cards</Text>
         </View>
       </TouchableHighlight>
@@ -51,7 +53,7 @@ class DeckList extends Component {
   render() {
     const { deckList } = this.props
     const { params } = this.props.navigation.state
-    console.log(params)
+    console.log('DECK LIST', deckList)
 
     return (
       <ScreenWithStatusBar>
@@ -100,9 +102,9 @@ function mapStateToProps(state) {
     deckList: state.decks
   }
 }
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     fetchDecks: () => dispatch(fetchDeckAction())
-//   }
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    decksLoaded: (decks) => dispatch(decksLoadedAction(decks))
+  }
+}
 export default connect(mapStateToProps, null)(DeckList)

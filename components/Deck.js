@@ -21,27 +21,27 @@ class Deck extends Component {
   }
 
   onPressStartQuiz(navigation, item) {
-    const cardId = item.cards.length === 0 ? null : item.cards[0].id
+    const cardId = item.questions.length === 0 ? null : item.questions[0].id
     navigation.navigate("QuizScreen", { deck: item, cardIndex: 0 })
   }
 
   findDeck(decks, deckId) {
-    return decks.find(item => (item.id === deckId))
+    return decks.find(item => (item.title === deckId))
   }
 
   render() {
     const { params } = this.props.navigation.state
     const { deckId } = params
     const deck = this.findDeck(this.props.decks, deckId)
-    const startQuizButtonDisabled = (deck.cards.length === 0)
+    const startQuizButtonDisabled = (deck.questions.length === 0)
     const startQuizButtonStyle = startQuizButtonDisabled ? styles.disabledButton : styles.blackButton
     const startQuizButtonTitleStyle = startQuizButtonDisabled ? styles.disabledButtonTitle : styles.blackButtonTitle
 
     return (
       <View style={styles.container}>
         <View style={styles.mainView}>
-          <Text style={styles.deckTitle}>{deck.name}</Text>
-          <Text style={styles.deckSubTitle}>{deck.cards.length} cards</Text>
+          <Text style={styles.deckTitle}>{deck.title}</Text>
+          <Text style={styles.deckSubTitle}>{deck.questions.length} cards</Text>
         </View>
         <View style={styles.controlGroupView}>
           <TouchableOpacity style={styles.whiteButton} onPress={() => {

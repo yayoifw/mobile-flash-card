@@ -8,7 +8,8 @@ import AddQuiz from './components/AddQuiz'
 import DeckList from './components/DeckList'
 import DeckAdd from './components/DeckAdd'
 import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
-import ScreenWithStatusBar from './components/ScreenWithStatusBar'
+
+import {initDatabase, getDecks, getDeck, saveDeckTitle} from './utils/api'
 
 
 const TabNav = TabNavigator({
@@ -46,21 +47,21 @@ const RootNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    initDatabase()
+  }
+
   render() {
+    getDecks().then(decks => console.log('decks=', decks))
+    const aDeck = getDeck('JavaScript')
+    saveDeckTitle('NEW ABC')
+
     return (
       <Provider store={store}>
           <RootNavigator />
       </Provider>
     );
   }
-  // render() {
-  //   return (
-  //     <Provider store={store}>
-  //       <ScreenWithStatusBar>
-  //         <RootNavigator />
-  //       </ScreenWithStatusBar>
-  //     </Provider>
-  //   );
-  // }
 }
 

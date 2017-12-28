@@ -34,7 +34,7 @@ class Quiz extends Component {
 
     // go to next card
     let cardIndex = this.state.cardIndex
-    if ((cardIndex+1) < deck.cards.length) {
+    if ((cardIndex+1) < deck.questions.length) {
       this.setState({
         cardIndex: cardIndex + 1,
         noOfCorrectAnswers
@@ -58,8 +58,7 @@ class Quiz extends Component {
   }
 
   findCard(deck, cardIndex) {
-    const cardId = deck.cards[cardIndex]
-    return this.props.cards.find(item => (item.id === cardId))
+    return deck.questions[cardIndex]
   }
 
   render() {
@@ -68,12 +67,12 @@ class Quiz extends Component {
     const card = this.findCard(deck, this.state.cardIndex)
 
     if (this.state.quizCompleted) {
-      const percentCorrect = Math.round((this.state.noOfCorrectAnswers / deck.cards.length) * 100)
+      const percentCorrect = Math.round((this.state.noOfCorrectAnswers / deck.questions.length) * 100)
 
       return (
         <View style={styles.container}>
           <View style={styles.mainContent}>
-            <Text>{this.state.cardIndex + 1} / {deck.cards.length}</Text>
+            <Text>{this.state.cardIndex + 1} / {deck.questions.length}</Text>
             <Text style={styles.title}>Your score is {percentCorrect} %!</Text>
           </View>
           <View style={styles.quizControl}>
@@ -93,7 +92,7 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.mainContent}>
-          <Text>{this.state.cardIndex + 1} / {deck.cards.length}</Text>
+          <Text>{this.state.cardIndex + 1} / {deck.questions.length}</Text>
           <Card card={card}/>
         </View>
         <View style={styles.quizControl}>
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    cards: state.cards
+    decks: state.decks
   }
 }
 // function mapDispatchToProps(dispatch) {
