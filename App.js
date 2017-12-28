@@ -1,5 +1,5 @@
 import React from 'react';
-import store from './store'
+import store from './utils/store'
 import {Provider} from 'react-redux'
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import Deck from './components/Deck'

@@ -12,7 +12,7 @@ import Card from './Card'
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.deck.name}`
+    title: `${navigation.state.params.deck.title}`
   })
 
   state = {
@@ -72,7 +72,7 @@ class Quiz extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.mainContent}>
-            <Text>{this.state.cardIndex + 1} / {deck.questions.length}</Text>
+            <Text style={styles.title}>You have completed {deck.questions.length} Quiz.</Text>
             <Text style={styles.title}>Your score is {percentCorrect} %!</Text>
           </View>
           <View style={styles.quizControl}>

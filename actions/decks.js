@@ -5,9 +5,6 @@ import {DECK_ADD, DECK_DELETE, DECK_LIST_LOADED} from './index'
     title: 'string',
     questions: []
   }
-
- * @param postId
- * @param voteType
  */
 
 export const decksLoadedAction = (decks) => ({

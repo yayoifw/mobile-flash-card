@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {View, Text, FlatList, TouchableOpacity, TouchableHighlight, Modal, StyleSheet, Platform} from 'react-native'
 import ScreenWithStatusBar from './ScreenWithStatusBar'
 import {decksLoadedAction} from '../actions/decks'
-import {getDecks, getDeck, saveDeckTitle} from '../utils/api'
+import {getDecks, getDecksAsArrayList, saveDeckTitle} from '../utils/api'
 
 
 class DeckList extends Component {
@@ -24,7 +24,7 @@ class DeckList extends Component {
 
   componentDidMount() {
     const {decksLoaded} = this.props
-    getDecks().then(decks => {
+    getDecksAsArrayList().then(decks => {
       decksLoaded(decks)
     })
   }

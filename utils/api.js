@@ -36,9 +36,14 @@ function decksObjToArrayList(decksObj) {
 }
 
 // returns all of the decks along with their titles, questions, and answers.
-export function getDecks() {
+export function getDecksAsArrayList() {
   return AsyncStorage.getItem(UDACICARD_KEY).then((data) => {
     return decksObjToArrayList(JSON.parse(data))})
+}
+
+// returns all of the decks along with their titles, questions, and answers.
+export function getDecks() {
+  return AsyncStorage.getItem(UDACICARD_KEY).then(JSON.parse)
 }
 
 // take in a single id argument and return the deck associated with that id.
@@ -66,7 +71,7 @@ export function saveDeckTitle(title) {
 export function addcardToDeck(title, card) {
   getDecks().then(decks => {
     if (decks[title] !== undefined) {
-      decks.cards.push(card)
+      decks[title].questions.push(card)
       AsyncStorage.setItem(UDACICARD_KEY, JSON.stringify(decks))
     }
   })
