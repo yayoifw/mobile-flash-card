@@ -36,7 +36,7 @@ class DeckAdd extends Component {
     }
     this.props.addDeck(newDeck)
     saveDeckTitle(title)
-    this.props.navigation.navigate('DeckList')
+    this.props.navigation.navigate("DeckScreen", { deckId: title, deckName: title })
   }
 
   render() {
